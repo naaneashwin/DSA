@@ -14,6 +14,7 @@ public class CeilingAndFlooring {
 			System.out.println(arr[floorResult]);
 		}
 		else System.out.println("No floor value found");
+		
 	}
 	private static int ceiling(int[] arr, int target) {
 		int low = 0, high = arr.length-1;
