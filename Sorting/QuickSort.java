@@ -1,39 +1,56 @@
 package Sorting;
 
 public class QuickSort {
-	public static void main(String[] args) {
-		int[] arr = {5,1,3,2,6,4,8,9,7};
-		sort(arr, 0, arr.length-1);
-		for(int x: arr) System.out.print(x +" ");
+	public QuickSort(int[] arr) {
+		sort(arr);
 	}
-	private static void sort(int arr[], int start, int end) {
+	private void sort(int[] arr) {
+		quickSort(arr, 0, arr.length-1);
+	}
+	private static void quickSort(int arr[], int start, int end) {
 		if(start<end) {
-			int pivot = partition(arr,start, end);
-			sort(arr, start, pivot-1);
-			sort(arr, pivot+1, end);
+			int pivot = partitionLeft(arr,start, end);
+			quickSort(arr, start, pivot-1);
+			quickSort(arr, pivot+1, end);
 		}
 	}
-	private static int partition(int arr[], int left, int right) {
+	private static int partitionRight(int arr[], int left, int right) {
+		int pivot = right;
+		int i=left-1;
+		for(int j=left; j<right; j++) {
+			if(arr[j]<=arr[pivot]) {
+				i++;
+				int temp = arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+			}
+		}
+		int temp = arr[i+1];
+		arr[i+1]=arr[right];
+		arr[right]=temp;
+		
+		
+		
+		return i+1;
+	}
+	private static int partitionLeft(int arr[], int left, int right) {
 		int pivot = left;
-		while(arr[pivot]<arr[right]) {
-			right--;
+		int i=right+1;
+		for(int j=right; j>left; j--) {
+			if(arr[j]>=arr[pivot]) {
+				i--;
+				int temp = arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+			}
 		}
-		int tempR = arr[pivot];
-		arr[pivot]=arr[right];
-		arr[right]=tempR;
+		int temp = arr[i-1];
+		arr[i-1]=arr[left];
+		arr[left]=temp;
 		
-		pivot = right;
-		while(arr[pivot]>arr[left]) {
-			left++;
-		}
-		int tempL = arr[pivot];
-		arr[pivot]=arr[left];
-		arr[left]=tempL;
 		
-		pivot = left;
 		
-		return pivot;
+		return i-1;
 	}
-	
 }
 
